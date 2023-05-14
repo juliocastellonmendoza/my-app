@@ -1,0 +1,75 @@
+<app-header></app-header>
+
+<div class="container">
+
+  <div class="container">
+
+    <div class="form-outline mb-4">
+    <label class="form-label" for="datatable-search-input">Buscar por título</label>
+    <input type="search" class="form-control" name="filterget" id="datatable-search-input" [(ngModel)]="filterget">
+  </div>
+  <div id="datatable">
+  </div>
+
+  <div class="form-group-row">
+    <label class="form-label" for="datatable-search-input">Seleccionar cantidad para mostrar</label>
+    <select id="inputState" [(ngModel)]="pageSize" class="form-control" name="sele">
+
+      <option selected>Seleccione...</option>
+      <option [value]="p.v" *ngFor="let p of pag">
+        {{p.n}}
+      </option>
+      <!-- <option value="10">10</option>
+      <option value="15">15</option>
+      <option value="20">20</option>
+      <option value="25">25</option>
+      <option value="30">30</option> -->
+      
+    </select>
+  </div>
+
+  </div>
+  
+  <br>
+  <br>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <!-- <th scope="col">Usuario</th> -->
+        <th scope="col">ID</th>
+        <th scope="col">Título</th>
+        <th scope="col">Completado</th>
+        <th scope="col">Inactivar</th>
+        <th scope="col">Modificar</th>
+        <th scope="col">Configurar</th>
+        <th scope="col">Puntos</th>
+        <th scope="col">Aprobar Clientes</th>
+        <th scope="col">Aplicaciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users | slice:desde:hasta | filter:filterget">
+        <!-- <th>{{user.userId}}</th> -->
+        <th scope="row">{{user.id}}</th>
+        <td>{{user.title}}</td>
+        <td>{{user.completed}}</td>
+        <td><a href="#"><img src="../../../assets/circle-xmark-solid.svg"></a></td>
+        <td><a href="#"><img src="../../../assets/pen-to-square-solid.svg"></a></td>
+        <td><a href="#"><img src="../../../assets/sliders-solid.svg"></a></td>
+        <td><a href="#"><img src="../../../assets/location-dot-solid.svg"></a></td>
+        <td><a href="#"><img src="../../../assets/vota-si.png"></a></td>
+        <td><a href="#"><img src="../../../assets/download-solid.svg"></a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <mat-paginator [length]="users.length"
+              [pageSize]="pageSize"
+              (page)="cambiarPagina($event)">
+              aria-label="Select page">
+  </mat-paginator>
+
+</div>
+
+<app-footer></app-footer>
